@@ -209,7 +209,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let f of failSales" style="background-color: #e76363 ;">
+              <tr *ngFor="let f of failSales" >
                 <th scope="row">
                   {{f.id}}
                 </th>
@@ -223,7 +223,7 @@
                   {{f.grossAmount}} €
                 </td>
                 <td>
-                  <a href="#!" class="btn btn-sm btn-danger" click="reload()">recargar <i class="fas fa-sync-alt"></i></a>
+                  <a href="#!" class="btn btn-sm btn-danger" (click)="reload(f)">recargar <i class="fas fa-sync-alt"></i></a>
                 </td>
               </tr>
             </tbody>
