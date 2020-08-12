@@ -25,9 +25,10 @@ export class DashboardComponent implements OnInit {
   public clicked1: boolean = false;
   public sales= [];
   public totalSales;
-  public failSales;
+  public failSales = [];
   public totalRevenue;
   public totalUser;
+  public viewMore:boolean = true;
 
 
   constructor(private _productsService: ProductsService) { }
@@ -62,6 +63,8 @@ export class DashboardComponent implements OnInit {
   }
 
   load(){
+    this.viewMore = true;
+    this.sales = [];
     this._productsService.getLimitSales().subscribe(
       (response) => {
         response.forEach(element => {
@@ -80,10 +83,16 @@ export class DashboardComponent implements OnInit {
     );
     this._productsService.getFailSales().subscribe(
       (response) => {
-        this.failSales = response;
+        response.forEach(element => {
+          return this.failSales.push(element);
+        });
+        for (let i = 0; i < this.failSales.length; i++) {
+          this.failSales[i].orderLines = this.failSales[i].orderLines.replace(/'/g, '"');
+          this.failSales[i].orderLines = JSON.parse(this.failSales[i].orderLines);
+        }
+        console.log(this.failSales)
       },
       (error) => {
-  
       }
     );
     this._productsService.getTotalRevenue().subscribe(
@@ -113,6 +122,30 @@ export class DashboardComponent implements OnInit {
   }
 
 
+  loadAll(){
+    this.viewMore = false;
+    this.sales = [];
+    this._productsService.getAllSales().subscribe(
+      (response) => {
+        response.forEach(element => {
+          return this.sales.push(element);
+        });
+        for (let i = 0; i < this.sales.length; i++) {
+          this.sales[i].orderLines = this.sales[i].orderLines.replace(/'/g, '"');
+          this.sales[i].orderLines = JSON.parse(this.sales[i].orderLines);
+        }
+        console.log(this.sales)
+
+      },
+      (error) => {
+
+      }
+    );
+  }
+
+  reload(){
+    
+  }
 
 
 

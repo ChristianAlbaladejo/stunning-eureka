@@ -93,7 +93,8 @@
               <h3 class="mb-0">Ventas</h3>
             </div>
             <div class="col text-right">
-              <a href="#!" class="btn btn-sm btn-primary">Ver mas</a>
+              <a href="#!" *ngIf="viewMore" class="btn btn-sm btn-primary" (click)="loadAll()" >Ver mas</a>
+              <a href="#!" class="btn btn-sm btn-primary" *ngIf="!viewMore" (click)="load()">Ver mas</a>
             </div>
           </div>
         </div>
@@ -183,6 +184,53 @@
     </div>
   </div>
   <div class="row mt-5">
+    <div class="col-xl-8 mb-5 mb-xl-0">
+      <div class="card shadow">
+        <div class="card-header border-0">
+          <div class="row align-items-center">
+            <div class="col">
+              <h3 class="mb-0">Ventas Fallidas</h3>
+            </div>
+            <div class="col text-right">
+              
+            </div>
+          </div>
+        </div>
+        <div class="table-responsive">
+          <!-- Projects table -->
+          <table class="table align-items-center table-flush">
+            <thead class="thead-light">
+              <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Nº Productos</th>
+                <th scope="col">Fecha</th>
+                <th scope="col">Total</th>
+                <th scope="col">Recargar </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let f of failSales" style="background-color: #e76363 ;">
+                <th scope="row">
+                  {{f.id}}
+                </th>
+                <td>
+                  {{f.orderLines.length}}
+                </td>
+                <td>
+                  {{f.date | date:'medium'}}
+                </td>
+                <td>
+                  {{f.grossAmount}} €
+                </td>
+                <td>
+                  <a href="#!" class="btn btn-sm btn-danger" click="reload()">recargar <i class="fas fa-sync-alt"></i></a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
     <!-- <div class="col-xl-8 mb-5 mb-xl-0">
       <div class="card shadow">
         <div class="card-header border-0">
