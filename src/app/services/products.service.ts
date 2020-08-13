@@ -9,14 +9,14 @@ export class ProductsService {
   public stats;
 
   constructor(public _http: HttpClient) {
-    this.url = 'https://panesandco.herokuapp.com'; 
-  /*   this.url = 'http://localhost:3000'; */
+    this.url = 'https://panesandco.herokuapp.com';
+    /*   this.url = 'http://localhost:3000'; */
   }
 
   getFamilies(): Observable<any> {
     let headers = new HttpHeaders({
       'Content-Type': 'application/json; charset=UTF-8"',
-      
+
     });
 
     return this._http.get(this.url + '/', { headers: headers });
@@ -35,7 +35,7 @@ export class ProductsService {
       'Content-Type': 'application/json; charset=UTF-8"',
     });
 
-    return this._http.get(this.url + '/products/'+id, { headers: headers });
+    return this._http.get(this.url + '/products/' + id, { headers: headers });
   }
 
   getProductById(id): Observable<any> {
@@ -51,7 +51,7 @@ export class ProductsService {
       'Content-Type': 'application/json; charset=UTF-8"',
     });
 
-    return this._http.get(this.url + '/familiName/'+id, { headers: headers });
+    return this._http.get(this.url + '/familiName/' + id, { headers: headers });
   }
 
   lastOrder(): Observable<any> {
@@ -67,15 +67,15 @@ export class ProductsService {
       'Content-Type': 'application/json; charset=UTF-8"',
     });
 
-    return this._http.get(this.url + '/filter/'+ f,{ headers: headers });
+    return this._http.get(this.url + '/filter/' + f, { headers: headers });
   }
 
-  filterByName(f,id): Observable<any> {
+  filterByName(f, id): Observable<any> {
     let headers = new HttpHeaders({
       'Content-Type': 'application/json; charset=UTF-8"',
     });
 
-    return this._http.get(this.url + '/filterByName/' + f+'/'+id, { headers: headers });
+    return this._http.get(this.url + '/filterByName/' + f + '/' + id, { headers: headers });
   }
 
   getSalesOrders(id): Observable<any> {
@@ -87,14 +87,23 @@ export class ProductsService {
     return this._http.get(this.url + '/salesorders/' + id, { headers: headers });
   }
 
-//Admin
+  //Admin
   getAllSales(): Observable<any> {
     let headers = new HttpHeaders({
       'Content-Type': 'application/json; charset=UTF-8"',
       'Authorization': localStorage.getItem("token")
     });
 
-    return this._http.get(this.url + '/admin/sales/all' , { headers: headers });
+    return this._http.get(this.url + '/admin/sales/all', { headers: headers });
+  }
+
+  update(order): Observable<any> {
+    let headers = new HttpHeaders({
+      'Authorization': localStorage.getItem("token"),
+      'Content-Type': 'application/json; charset=UTF-8'
+    });
+
+    return this._http.put(this.url + '/admin/updateOrder/'+order,'', {headers: headers});
   }
 
   getLimitSales(): Observable<any> {
@@ -103,7 +112,7 @@ export class ProductsService {
       'Authorization': localStorage.getItem("token")
     });
 
-    return this._http.get(this.url + '/admin/sales/' , { headers: headers });
+    return this._http.get(this.url + '/admin/sales/', { headers: headers });
   }
 
   getFailSales(): Observable<any> {
@@ -138,7 +147,16 @@ export class ProductsService {
       'Content-Type': 'application/json; charset=UTF-8"',
       'Authorization': localStorage.getItem("token")
     });
-
+    console.log(headers)
     return this._http.get(this.url + '/admin/totalSales/', { headers: headers });
+  }
+
+  getUserOrder(id): Observable<any> {
+    let headers = new HttpHeaders({
+      'Content-Type': 'application/json; charset=UTF-8"',
+      'Authorization': localStorage.getItem("token")
+    });
+
+    return this._http.get(this.url + '/admin/returnUser/' + id, { headers: headers });
   }
 }
