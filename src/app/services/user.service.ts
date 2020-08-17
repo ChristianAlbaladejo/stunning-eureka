@@ -49,5 +49,13 @@ export class UserService {
         });
         return this._http.post(this.url + '/register', user, { headers: headers });
     }
+
+    getUsers(): Observable<any> {
+        let headers = new HttpHeaders({
+            'Content-Type': 'application/json',
+            'Authorization': localStorage.getItem("token")
+        });
+        return this._http.get(this.url + '/admin/getUsers/', { headers: headers });
+    }
 }
 

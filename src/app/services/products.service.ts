@@ -9,8 +9,8 @@ export class ProductsService {
   public stats;
 
   constructor(public _http: HttpClient) {
-    this.url = 'https://panesandco.herokuapp.com';
-    /*   this.url = 'http://localhost:3000'; */
+     this.url = 'https://panesandco.herokuapp.com'; 
+      /* this.url = 'http://localhost:3000';  */
   }
 
   getFamilies(): Observable<any> {
@@ -97,6 +97,16 @@ export class ProductsService {
     return this._http.get(this.url + '/admin/sales/all', { headers: headers });
   }
 
+  getChars(id): Observable<any> {
+    let headers = new HttpHeaders({
+      'Content-Type': 'application/json; charset=UTF-8"',
+      'Authorization': localStorage.getItem("token")
+    });
+
+    return this._http.get(this.url + '/admin/getchars/' + id, { headers: headers});
+  }
+
+
   update(order): Observable<any> {
     let headers = new HttpHeaders({
       'Authorization': localStorage.getItem("token"),
@@ -158,5 +168,28 @@ export class ProductsService {
     });
 
     return this._http.get(this.url + '/admin/returnUser/' + id, { headers: headers });
+  }
+  
+  getAllOrders(): Observable<any> {
+    let headers = new HttpHeaders({
+      'Content-Type': 'application/json; charset=UTF-8"',
+      'Authorization': localStorage.getItem("token")
+    });
+
+    return this._http.get(this.url + '/admin/getAllOrders/', { headers: headers });
+  }
+
+  updateProducts(p): Observable<any> {
+    let headers = new HttpHeaders({
+      'Content-Type': 'application/json; charset=UTF-8"',
+      'Authorization': localStorage.getItem("token")
+    });
+    
+    let array = JSON.stringify(p)
+    let products = {
+      'products':  array
+    }
+    console.log(products);
+    return this._http.post(this.url + '/admin/updateProducts', {'products': 'asd'}, { headers: headers });
   }
 }

@@ -1,0 +1,64 @@
+<div class="header bg-gradient-danger pb-8 pt-5 pt-md-8">
+</div>
+<div class="container-fluid mt--7">
+    <div class="row">
+        <div class="col-xl-12 mb-12 mb-xl-0">
+            <div class="card shadow">
+                <div class="card-header border-0">
+                    <div class="row align-items-center">
+                        <div class="col">
+                            <h3 class="mb-0">Productos</h3>
+                        </div>
+                        <div class="col text-right">
+                            <a href="#/products" class="btn btn-md btn-primary" (click)="save()">Save</a>
+                        </div> 
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <!-- Projects table -->
+                    <table class="table align-items-center table-flush">
+                        <thead class="thead-light">
+                            <tr>
+                                <th scope="col"></th>
+                                <th scope="col">Id</th>
+                                <th scope="col">Nombre</th>
+                                <th scope="col">PLU</th>
+                                <th scope="col">Id de Familia</th>
+                                <th scope="col">Precio</th>
+                                <th scope="col">Notas</th>
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let p of products">
+                                <th scope="row">
+                                    <input type="checkbox" (change)="checked($event, p)">
+                                </th>
+                                <td >
+                                    {{p.id}}
+                                </td>
+                                <td>
+                                    {{p.name}}
+                                </td>
+                                <td>
+                                    {{p.PLU}}
+                                </td>
+                                <td>
+                                    {{p.familyId}}
+                                </td>
+                                <td>
+                                <input class="form-control form-control-lg" (value)="p.costPrice" [(ngModel)]="p.costPrice" type="text" placeholder=".form-control-lg">
+                                </td>
+                                <td>
+                                    <div class="form-group">
+                                        <textarea class="form-control" (value)="p.notes" [(ngModel)]="p.notes" id="area" rows="4"></textarea>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

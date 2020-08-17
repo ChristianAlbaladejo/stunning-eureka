@@ -31,10 +31,20 @@ export class DashboardComponent implements OnInit {
   public totalUser;
   public viewMore: boolean = true;
   public lastOrderId: any;
-  public orderUser: any
+  public orderUser: any;
+  public char = [];
 
 
-  constructor(private _productsService: ProductsService, private http: HttpClient) { }
+  constructor(private _productsService: ProductsService, private http: HttpClient) {
+    for (let i = 0; i < 12; i++) {
+      this._productsService.getChars(i).subscribe(response => {
+        this.char.push(response[0]['count(*)'])
+
+      }, error => {
+        console.log(error);
+      })
+    }
+  }
 
   ngOnInit() {
     this.load()
@@ -49,14 +59,25 @@ export class DashboardComponent implements OnInit {
 
     parseOptions(Chart, chartOptions());
 
-
-    var ordersChart = new Chart(chartOrders, {
-      type: 'bar',
-      options: chartExample2.options,
-      data: chartExample2.data
-    });
-
+    console.log(this.char)
+    setTimeout(() => {
+      var ordersChart = new Chart(chartOrders, {
+        type: 'bar',
+        options: chartExample2.options,
+        data: {
+          labels: ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+          datasets: [
+            {
+              label: "Sales",
+              data: [this.char[0], this.char[1], this.char[2], this.char[3], this.char[4], this.char[5], this.char[6], this.char[7], this.char[8], this.char[9], this.char[10], this.char[11]]
+            }
+          ]
+        }
+      });
+    }, 700);
     var chartSales = document.getElementById('chart-sales');
+
+
 
     this.salesChart = new Chart(chartSales, {
       type: 'line',
@@ -68,6 +89,7 @@ export class DashboardComponent implements OnInit {
   load() {
     this.viewMore = true;
     this.sales = [];
+    this.failSales = [];
     this._productsService.getLimitSales().subscribe(
       (response) => {
         response.forEach(element => {
@@ -137,8 +159,6 @@ export class DashboardComponent implements OnInit {
           this.sales[i].orderLines = this.sales[i].orderLines.replace(/'/g, '"');
           this.sales[i].orderLines = JSON.parse(this.sales[i].orderLines);
         }
-        console.log(this.sales)
-
       },
       (error) => {
 
@@ -147,7 +167,6 @@ export class DashboardComponent implements OnInit {
   }
 
   reload(o) {
-    console.log(o);
     //TO DO
     //ENVIAR DATOS AL TPV
     //ticket
