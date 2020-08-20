@@ -17,6 +17,7 @@
                         <thead class="thead-light">
                             <tr>
                                 <th scope="col">Id</th>
+                                <th scope="col">Pedido</th>
                                 <th scope="col">Precio</th>
                                 <th scope="col">userId</th>
                                 <th scope="col">Fecha realizado</th>
@@ -27,10 +28,22 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let o of orders">
+                            <tr *ngFor="let o of orders; let i = index">
                                 <th scope="row">
                                     {{o.id}}
                                 </th>
+                                <td>
+                                    <div class="dropdown">
+                                        <button class="btn btn-secondary dropdown-toggle" type="button"
+                                            id="dropdown{{i}}" data-toggle="dropdown" aria-haspopup="true"
+                                            aria-expanded="false">
+                                            Pedido
+                                        </button>
+                                        <div class="dropdown-menu" aria-labelledby="dropdown{{i}}">
+                                            <a class="dropdown-item" *ngFor="let lines of o.orderLines">{{lines.name}}</a>
+                                        </div>
+                                    </div>
+                                </td>
                                 <td>
                                     {{o.grossAmount}}
                                 </td>

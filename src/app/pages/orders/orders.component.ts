@@ -9,13 +9,21 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
   providers: [ProductsService]
 })
 export class OrdersComponent implements OnInit {
-  orders: any;
+  orders = [];
 
   constructor(private _productsService: ProductsService, public http: HttpClient) { }
 
   ngOnInit(): void {
     this._productsService.getAllOrders().subscribe(response => {
-      this.orders = response
+
+      response.forEach(element => {
+        return this.orders.push(element);
+      });
+
+      for (let i = 0; i < this.orders.length; i++) {
+        this.orders[i].orderLines = this.orders[i].orderLines.replace(/'/g, '"');
+        this.orders[i].orderLines = JSON.parse(this.orders[i].orderLines);
+      }
       console.log(this.orders);
     })
   }
