@@ -23,6 +23,9 @@ export class NavbarComponent implements OnInit {
     this.identity = JSON.parse(localStorage.getItem('identity'));
     console.log(this.identity[0]);
   }
+  logout(){
+    localStorage.clear()
+  }
   getTitle(){
     var titlee = this.location.prepareExternalUrl(this.location.path());
     if(titlee.charAt(0) === '#'){
