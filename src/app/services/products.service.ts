@@ -9,8 +9,8 @@ export class ProductsService {
   public stats;
 
   constructor(public _http: HttpClient) {
-     this.url = 'https://panesandco.herokuapp.com'; 
-      /* this.url = 'http://localhost:3000';  */
+    this.url = 'https://panesandco.herokuapp.com';
+    /* this.url = 'http://localhost:3000';  */
   }
 
   getFamilies(): Observable<any> {
@@ -103,7 +103,7 @@ export class ProductsService {
       'Authorization': localStorage.getItem("token")
     });
 
-    return this._http.get(this.url + '/admin/getchars/' + id, { headers: headers});
+    return this._http.get(this.url + '/admin/getchars/' + id, { headers: headers });
   }
 
 
@@ -113,7 +113,7 @@ export class ProductsService {
       'Content-Type': 'application/json; charset=UTF-8'
     });
 
-    return this._http.put(this.url + '/admin/updateOrder/'+order,'', {headers: headers});
+    return this._http.put(this.url + '/admin/updateOrder/' + order, '', { headers: headers });
   }
 
   getLimitSales(): Observable<any> {
@@ -169,7 +169,7 @@ export class ProductsService {
 
     return this._http.get(this.url + '/admin/returnUser/' + id, { headers: headers });
   }
-  
+
   getAllOrders(): Observable<any> {
     let headers = new HttpHeaders({
       'Content-Type': 'application/json; charset=UTF-8"',
@@ -184,12 +184,21 @@ export class ProductsService {
       'Content-Type': 'application/json; charset=UTF-8"',
       'Authorization': localStorage.getItem("token")
     });
-    
+
     let array = JSON.stringify(p)
     let products = {
-      'products':  array
+      'products': array
     }
     console.log(products);
-    return this._http.post(this.url + '/admin/updateProducts', {'products': 'asd'}, { headers: headers });
+    return this._http.post(this.url + '/admin/updateProducts', { 'products': 'asd' }, { headers: headers });
+  }
+
+  getAllOrdersExtended(): Observable<any> {
+    let headers = new HttpHeaders({
+      'Content-Type': 'application/json; charset=UTF-8"',
+      'Authorization': localStorage.getItem("token")
+    });
+
+    return this._http.get(this.url + '/admin/getAllOrdersShort/', { headers: headers });
   }
 }
