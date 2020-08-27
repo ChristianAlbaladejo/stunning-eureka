@@ -29,6 +29,7 @@
                                 <th scope="col">Notas</th>
                                 <th scope="col">Cliente</th>
                                 <th scope="col">Email</th>
+                                <th  scope="col">Teléfono</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -85,7 +86,7 @@
                                     </div>
                                 </td>
                                 <td>
-                                    {{o.grossAmount}}
+                                    {{o.grossAmount | number : '1.2-2'}}
                                 </td>
                                 <td>
                                     {{o.userId}}
@@ -104,6 +105,9 @@
                                 </td>
                                 <td>
                                     {{o.email}}
+                                </td>
+                                <td>
+                                    {{o.telefono}}
                                 </td>
                             </tr>
                         </tbody>

@@ -30,7 +30,7 @@
               <div class="row">
                 <div class="col">
                   <h5 class="card-title text-uppercase text-muted mb-0">Numero de ventas</h5>
-                  <span class="h2 font-weight-bold mb-0">{{totalSales}}</span>
+                  <span class="h2 font-weight-bold mb-0">{{totalSales | number : '1.2-2'}}</span>
                 </div>
                 <div class="col-auto">
                   <div class="icon icon-shape bg-warning text-white rounded-circle shadow">
@@ -121,7 +121,7 @@
                   {{o.date | date:'medium'}}
                 </td>
                 <td>
-                  {{o.grossAmount}} €
+                  {{o.grossAmount | number : '1.2-2'}} €
                 </td>
               </tr>
             </tbody>
@@ -220,7 +220,7 @@
                   {{f.date | date:'medium'}}
                 </td>
                 <td>
-                  {{f.grossAmount}} €
+                  {{f.grossAmount | number : '1.2-2'}} €
                 </td>
                 <td>
                   <a href="#!" class="btn btn-sm btn-danger" (click)="reload(f)">recargar <i class="fas fa-sync-alt"></i></a>
