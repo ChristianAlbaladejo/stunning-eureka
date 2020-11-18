@@ -11,7 +11,7 @@
                         </div>
                         <div class="col text-right">
                             <a href="#/products" class="btn btn-md btn-primary" (click)="save()">Save</a>
-                        </div> 
+                        </div>
                     </div>
                 </div>
                 <div class="table-responsive">
@@ -20,13 +20,13 @@
                         <thead class="thead-light">
                             <tr>
                                 <th scope="col"></th>
-                                <th scope="col">Id</th>
+                                <th scope="col">Imagen</th>
                                 <th scope="col">Nombre</th>
-                                <th scope="col">PLU</th>
-                                <th scope="col">Id de Familia</th>
+                                <th scope="col">Familia</th>
                                 <th scope="col">Precio</th>
                                 <th scope="col">Descripcion</th>
-                                
+                                <th scope="col"></th>
+
                             </tr>
                         </thead>
                         <tbody>
@@ -34,24 +34,91 @@
                                 <th scope="row">
                                     <input type="checkbox" (change)="checked($event, p)">
                                 </th>
-                                <td >
-                                    {{p.id}}
+                                <td>
+                                    <div>
+                                        <input class="fileInput" type="file" class="btn btn-md btn-primary"
+                                            accept="image/*" (change)="handleFileInput($event.target.files, p)">
+                                    </div>
                                 </td>
                                 <td>
-                                    {{p.name}}
+                                    <input class="form-control" (value)="p.name" [(ngModel)]="p.name" type="text">
                                 </td>
                                 <td>
-                                    {{p.PLU}}
-                                </td>
-                                <td>
-                                    {{p.familyId}}
-                                </td>
-                                <td>
-                                <input class="form-control form-control-lg" (value)="p.costPrice" [(ngModel)]="p.costPrice" type="text" placeholder=".form-control-lg">
+                                    <select name="select" class="btn btn-md btn-primary" [(ngModel)]="p.familyId">
+                                        <option [value]="f.id" *ngFor="let f of family">{{f.name}}</option>
+                                    </select>
                                 </td>
                                 <td>
                                     <div class="form-group">
-                                        <textarea class="form-control" (value)="p.description" [(ngModel)]="p.description" id="area" rows="4"></textarea>
+                                        <input class="form-control" (value)="p.costPrice" [(ngModel)]="p.costPrice"
+                                            type="number">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-group">
+                                        <textarea class="form-control" (value)="p.description"
+                                            [(ngModel)]="p.description" id="area" rows="4"></textarea>
+                                    </div>
+                                </td>
+                                <td class="delete">
+                                    <button (click)="delete(p)" class="btn btn-md btn-danger"><i class="fas fa-trash"></i></button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <br>
+            <div class="card shadow">
+                <div class="card-header border-0">
+                    <div class="row align-items-center">
+                        <div class="col">
+                            <h3 class="mb-0">Crear Producto</h3>
+                        </div>
+                        <div class="col text-right">
+                            <a href="#/products" class="btn btn-md btn-primary" (click)="createNewProduct()">Crear</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <!-- Projects table -->
+                    <table class="table align-items-center table-flush">
+                        <thead class="thead-light">
+                            <tr>
+                                <th scope="col">Imagen</th>
+                                <th scope="col">Nombre</th>
+                                <th scope="col">Familia</th>
+                                <th scope="col">Precio</th>
+                                <th scope="col">Descripcion</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <div>
+                                        <input class="fileInput" type="file" class="btn btn-md btn-primary"
+                                            accept="image/*" (change)="newImage($event.target.files)">
+                                    </div>
+                                </td>
+                                <td>
+                                    <input class="form-control" (value)="newFamilyName" [(ngModel)]="newProductName"
+                                        type="text">
+                                </td>
+                                <td>
+                                    <select name="select" class="btn btn-md btn-primary" [(ngModel)]="newProductFamily">
+                                        <option [value]="f.id" *ngFor="let f of family">{{f.name}}</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <div class="form-group">
+                                        <input class="form-control" [(ngModel)]="newProductPrice"
+                                            type="number">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-group">
+                                        <textarea class="form-control" value="Descripción..."
+                                            [(ngModel)]="newProductDesc" id="area" rows="4"></textarea>
                                     </div>
                                 </td>
                             </tr>

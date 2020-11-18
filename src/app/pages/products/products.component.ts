@@ -11,12 +11,24 @@ export class ProductsComponent implements OnInit {
 
   products = [];
   updateProducts = [];
+  family = [];
+  newProductPhoto ;
+  newProductName = "";
+  newProductFamily = "";
+  newProductDesc = "";
+  newProductPrice = "";
   constructor(private _productsService: ProductsService, public http: HttpClient) { }
 
   ngOnInit(): void {
     this._productsService.getProducts().subscribe(response => {
       this.products = response
-    })
+    });
+    this._productsService.getFamilies().subscribe(
+      (response) => {
+        console.log(response);
+        this.family = response;
+      }
+    );
   }
 
   save() {
@@ -28,11 +40,12 @@ export class ProductsComponent implements OnInit {
       'Authorization': localStorage.getItem("token")
     });
     this.http
-      .post('https://panesandco.herokuapp.com/admin/updateProducts/',
+      .post('http://91.134.193.171:3000/admin/updateProducts/',
         body, { headers: headers })
       .subscribe(data => {
-        console.log(data)
+        location.reload();
       }, error => {
+        console.error(error);
       });
   }
 
@@ -48,4 +61,75 @@ export class ProductsComponent implements OnInit {
     }
   }
 
+  async newImage(e) {
+    var reader = new FileReader();
+    reader.readAsDataURL(e.item(0));
+    reader.onload = (event) => {
+      this.newProductPhoto = reader.result
+    }
+  }
+
+  async handleFileInput(e, p) {
+    var reader = new FileReader();
+    reader.readAsDataURL(e.item(0));
+    reader.onload = (event) => {
+      for (let i = 0; i < this.products.length; i++) {
+        if (this.products[i].id == p.id) {
+          this.products[i].image = reader.result
+          console.log(reader.result);
+        }
+      }
+    }
+  }
+
+  createNewProduct(){
+    if (this.newProductPhoto == "undefined") {
+      this.newProductPhoto = ""
+    }
+    let product = {
+      "image": this.newProductPhoto,
+      "name": this.newProductName,
+      "family": this.newProductFamily,
+      "description": this.newProductDesc,
+      "price": this.newProductPrice
+    }
+    console.log(product)
+    var body = {
+      'products': JSON.stringify(product)
+    };
+
+    let headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': localStorage.getItem("token")
+    });
+    this.http
+      .post('http://91.134.193.171:3000/admin/newProduct/',
+        body, { headers: headers })
+      .subscribe(data => {
+        location.reload();
+      }, error => {
+        console.error(error);
+
+      });
+  }
+
+  delete(p) {
+    var body = {
+      'product': JSON.stringify(p)
+    };
+    console.log(p);
+
+    let headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': localStorage.getItem("token")
+    });
+    this.http
+      .post('http://91.134.193.171:3000/admin/deleteProduct/',
+        body, { headers: headers })
+      .subscribe(data => {
+        location.reload();
+      }, error => {
+        console.error(error);
+      });
+  }
 }

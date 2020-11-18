@@ -9,8 +9,9 @@ export class ProductsService {
   public stats;
 
   constructor(public _http: HttpClient) {
-    this.url = 'https://panesandco.herokuapp.com';
-    /* this.url = 'http://localhost:3000';  */
+    /* this.url = 'https://panesandco.herokuapp.com'; */
+    this.url = "http://91.134.193.171:3000";
+    /* this.url = "http://localhost:3000";   */
   }
 
   getFamilies(): Observable<any> {
@@ -200,5 +201,26 @@ export class ProductsService {
     });
 
     return this._http.get(this.url + '/admin/getAllOrdersShort/', { headers: headers });
+  }
+
+  getServices(): Observable<any> {
+    let headers = new HttpHeaders({
+      'Content-Type': 'application/json; charset=UTF-8"',
+      'Authorization': localStorage.getItem("token")
+    });
+
+    return this._http.get(this.url + '/admin/getNotifications/', { headers: headers });
+  }
+
+  updateNotifi(p): Observable<any> {
+    let headers = new HttpHeaders({
+      'Content-Type': 'application/json; charset=UTF-8"',
+      'Authorization': localStorage.getItem("token")
+    });
+
+    let array = JSON.stringify(p)
+    console.log(array);
+    
+    return this._http.post(this.url + '/admin/changeNotifications', { 'service': array }, { headers: headers });
   }
 }

@@ -9,6 +9,7 @@ import { TablesComponent } from '../../pages/tables/tables.component';
 import { UsersComponent } from '../../pages/users/users.component';
 import { ProductsComponent } from '../../pages/products/products.component'
 import { OrdersComponent } from '../../pages/orders/orders.component'
+import { FamilyesComponent } from '../../pages/familyes/familyes.component'
 import {
     AuthGuardService as AuthGuard
 } from '../../services/auth-guard.service';
@@ -20,5 +21,6 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'maps',          component: MapsComponent },
     { path: 'users',          component: UsersComponent, canActivate: [AuthGuard]},
     { path: 'products',    component: ProductsComponent, canActivate: [AuthGuard] },
-    { path: 'orders', component: OrdersComponent, canActivate: [AuthGuard] }
+    { path: 'orders', component: OrdersComponent, canActivate: [AuthGuard] },
+    { path: 'familyes', component: FamilyesComponent, canActivate: [AuthGuard] }
 ];

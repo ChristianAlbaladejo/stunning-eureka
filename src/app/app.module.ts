@@ -18,6 +18,7 @@ import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
 import { UsersComponent } from './pages/users/users.component';
 import { ProductsComponent } from './pages/products/products.component';
 import { OrdersComponent } from './pages/orders/orders.component';
+import { FamilyesComponent } from './pages/familyes/familyes.component';
 
 @NgModule({
   imports: [
@@ -35,7 +36,8 @@ import { OrdersComponent } from './pages/orders/orders.component';
     AuthLayoutComponent,
     UsersComponent,
     ProductsComponent,
-    OrdersComponent
+    OrdersComponent,
+    FamilyesComponent
   ],
   providers: [AuthService, AuthGuardService, { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
     JwtHelperService],

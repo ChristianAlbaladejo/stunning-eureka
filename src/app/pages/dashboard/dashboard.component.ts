@@ -33,7 +33,7 @@ export class DashboardComponent implements OnInit {
   public lastOrderId: any;
   public orderUser: any;
   public char = [];
-
+  public services;
 
   constructor(private _productsService: ProductsService, private http: HttpClient) {
     for (let i = 0; i < 12; i++) {
@@ -139,6 +139,15 @@ export class DashboardComponent implements OnInit {
     this._productsService.getTotalSales().subscribe(
       (response) => {
         this.totalSales = response[0]["COUNT(*)"];
+      },
+      (error) => {
+
+      }
+    );
+    this._productsService.getServices().subscribe(
+      (response) => {
+        this.services = response;
+        console.log(response)
       },
       (error) => {
 
@@ -300,6 +309,16 @@ export class DashboardComponent implements OnInit {
     );
   }
 
+  async checkValue(s){
+    console.log(s);
+    await this._productsService.updateNotifi(s).subscribe(
+      (response) => {
+        console.log(response)
+      },
+      (error) => {
+      }
+    );
+  }
 
 
   public updateOptions() {
