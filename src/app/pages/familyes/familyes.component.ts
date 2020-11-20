@@ -73,7 +73,7 @@ export class FamilyesComponent implements OnInit {
         'Authorization': localStorage.getItem("token")
       });
       this.http
-        .post('http://91.134.193.171:3000/admin/newFamily/',
+        .post('https://delivery.jnc.es/admin/newFamily/',
           body, { headers: headers })
         .subscribe(data => {
           location.reload(); 
@@ -94,7 +94,7 @@ export class FamilyesComponent implements OnInit {
         'Authorization': localStorage.getItem("token")
       });
       this.http
-        .post('http://91.134.193.171:3000/admin/deleteFamily/',
+        .post('https://delivery.jnc.es/admin/deleteFamily/',
           body, { headers: headers })
         .subscribe(data => {
           location.reload();
@@ -114,7 +114,7 @@ export class FamilyesComponent implements OnInit {
       'Authorization': localStorage.getItem("token")
     });
     this.http
-      .post('http://91.134.193.171:3000/admin/updateFamily/',
+      .post('https://delivery.jnc.es/admin/updateFamily/',
         body, { headers: headers })
       .subscribe(data => {
         location.reload();

@@ -40,7 +40,7 @@ export class ProductsComponent implements OnInit {
       'Authorization': localStorage.getItem("token")
     });
     this.http
-      .post('http://91.134.193.171:3000/admin/updateProducts/',
+      .post('https://delivery.jnc.es/admin/updateProducts/',
         body, { headers: headers })
       .subscribe(data => {
         location.reload();
@@ -103,7 +103,7 @@ export class ProductsComponent implements OnInit {
       'Authorization': localStorage.getItem("token")
     });
     this.http
-      .post('http://91.134.193.171:3000/admin/newProduct/',
+      .post('https://delivery.jnc.es/admin/newProduct/',
         body, { headers: headers })
       .subscribe(data => {
         location.reload();
@@ -124,7 +124,7 @@ export class ProductsComponent implements OnInit {
       'Authorization': localStorage.getItem("token")
     });
     this.http
-      .post('http://91.134.193.171:3000/admin/deleteProduct/',
+      .post('https://delivery.jnc.es/admin/deleteProduct/',
         body, { headers: headers })
       .subscribe(data => {
         location.reload();

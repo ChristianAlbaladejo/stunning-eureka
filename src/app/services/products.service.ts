@@ -10,7 +10,7 @@ export class ProductsService {
 
   constructor(public _http: HttpClient) {
     /* this.url = 'https://panesandco.herokuapp.com'; */
-    this.url = "http://91.134.193.171:3000";
+    this.url = "https://delivery.jnc.es";
     /* this.url = "http://localhost:3000";   */
   }
 
